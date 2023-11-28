@@ -1,2 +1,2 @@
 #!/bin/bash
-[ -z "$PYCODE" ] && echo "PYCODE is not set." && exit 1 || python -c "$PYCODE"
+python -c "$PYCODE"
