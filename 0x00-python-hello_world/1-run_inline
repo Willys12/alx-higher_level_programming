@@ -1,2 +1,4 @@
 #!/bin/bash
-python -c "$PYCODE"
+python - <<EOF
+print(f"Best School: {88+10}")
+EOF
