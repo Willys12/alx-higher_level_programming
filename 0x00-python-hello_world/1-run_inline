@@ -1,4 +1,7 @@
 #!/bin/bash
-python - <<EOF
-print(f"Best School: {88+10}")
-EOF
+if [ -z "$PYCODE" ]
+then
+echo "PYCODE is not set."
+exit 1
+fi
+echo "$PYCODE" | python
