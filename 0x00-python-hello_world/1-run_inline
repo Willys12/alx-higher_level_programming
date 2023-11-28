@@ -1,7 +1,2 @@
 #!/bin/bash
-if [ -z "$PYCODE" ]
-then
-echo "PYCODE is not set."
-exit 1
-fi
-echo "$PYCODE" | python
+[ -z "$PYCODE" ] && echo "PYCODE is not set." && exit 1 || echo "$PYCODE" | python
