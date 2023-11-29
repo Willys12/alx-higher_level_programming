@@ -1,0 +1,57 @@
+#!/usr/bin/python3
+
+import sys
+import os
+
+def compile_python_script(script_path):
+    try:
+        with open(script_path, 'r') as script_file:
+            source_code = script_file.read()
+            compiled_code = compile(source_code, script_path, 'exec')
+            return compiled_code
+    except FileNotFoundError:
+        print(f"Error: File '{script_path}' not found.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error compiling '{script_path}': {e}")
+        sys.exit(1)
+
+def check_compiled_file(compiled_file_path, target_string):
+    try:
+        with open(compiled_file_path, 'rb') as compiled_file:
+            compiled_content = compiled_file.read()
+            return target_string.encode() in compiled_content
+    except FileNotFoundError:
+        print(f"Error: Compiled file '{compiled_file_path}' not found.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error checking compiled file: {e}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    # Get the Python file name from the environment variable
+    pyfile_env = os.getenv("PYFILE")
+
+    if not pyfile_env:
+        print("Error: Environment variable $PYFILE is not set.")
+        sys.exit(1)
+
+    # Use the Python file name to derive the compiled output file name
+    output_file = f"{pyfile_env}c"
+
+    # Compile the Python script
+    compiled_code = compile_python_script(pyfile_env)
+
+    # Write the compiled code to the output file
+    with open(output_file, 'wb') as compiled_file:
+        compiled_file.write(compiled_code.co_code)
+
+    print(f"Script '{pyfile_env}' compiled successfully. Output file: {output_file}")
+
+    # Check if the compiled file contains the target string
+    target_string = "Best School"
+    if check_compiled_file(output_file, target_string):
+        print(f"The compiled file '{output_file}' contains the string '{target_string}'.")
+    else:
+        print(f"The compiled file '{output_file}' does not contain the string '{target_string}'.")
+
