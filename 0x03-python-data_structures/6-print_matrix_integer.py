@@ -1,6 +1,5 @@
 #!/usr/bin/pythn3
 def print_matrix_integer(matrix=[[]]):
     for row in matrix:
-        for i in row:
-            print("{}".format(i), end=" ")
-        print()
+        f_row = " ".join("{:<2}".format(element) for element in row)
+        print(f_row)
