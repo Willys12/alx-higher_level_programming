@@ -3,8 +3,8 @@ import importlib.util
 
 
 def print_defined_names(module_name):
-    spec = importlib.util.spec_from_file_location(module_name, \
-            f"{module_name}.pyc")
+    spec = importlib.util.spec_from_file_location(module_name,
+         f"{module_name}.pyc")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
 
