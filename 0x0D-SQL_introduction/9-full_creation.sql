@@ -10,5 +10,3 @@ VALUES (1, "JOHN", 10),
        (2, "ALEX", 3),
        (3, "BOB", 14),
        (4, "GEORGE", 8);
-
-SELECT * FROM `second_table`;
